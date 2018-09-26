@@ -44,9 +44,10 @@ def manager(client, address):
 			if acabou:
 				break;
 			randomico = randint(1,19) # convencao: 0 para "MENOR" e 1 para "MAIOR"
+			time.sleep(0.5)
 			print("O valor randomico gerado para o", meuNome, "eh", randomico)
 			meuValor = client.recv(size).decode("utf-8") # valor numero digitado pelo usuario
-			print("Recebido:", meuValor, "\n\tdo", meuNome)
+			print("Recebido:", meuValor, "\ndo", meuNome)
 			usernames = [item for item in usernames if item[0] != meuNome]
 			usernames.append((meuNome,meuValor,address))
 
@@ -72,7 +73,7 @@ def manager(client, address):
 			# PROCESSO DE AVALIACAO PARA VER SE O PLAYER ACABOU
 			data = client.recv(size).decode("utf-8")
 			time.sleep(1)
-			print("Recebido:", data, "\n\tdo", meuNome)
+			print("Recebido:", data, "\ndo", meuNome)
 			if data=="ACABEI":
 				acabou = True
 				ganhador = meuNome
@@ -97,7 +98,7 @@ def manager(client, address):
 	text = "Digite seu username: "
 	client.send(text.encode("utf-8"))
 	data = client.recv(size).decode("utf-8")
-	print("Recebido:", data, "\n\tdo", address)
+	print("Recebido:", data, "\ndo", address)
 	usernames.append((data,-1,address)) # (username, valorDigitado)
 
 	print("Usuário adicionado! \nNova lista de usuários:", [item[0] for item in usernames])
@@ -105,7 +106,7 @@ def manager(client, address):
 
 	while True:
 		data = client.recv(size).decode("utf-8")
-		print("Recebido:", data, "\n\tdo", meuNome)
+		print("Recebido:", data, "\ndo", meuNome)
 		if data:
 
 
@@ -120,7 +121,7 @@ def manager(client, address):
 				text = "DESAFIOU"
 				client.send(text.encode("utf-8")) # envia o texto para entrar na secao de desafio no cliente
 				data = client.recv(size).decode("utf-8") # recebendo o nome do desafiado
-				print("Recebido:", data, "\n\tdo", meuNome)
+				print("Recebido:", data, "\ndo", meuNome)
 				desafiados.append((data, meuNome)) # coloca o nome do desafiado na lista "desafiados"
 				while(any(data in item[0] for item in desafiados)):
 					pass
