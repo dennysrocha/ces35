@@ -99,6 +99,8 @@ def manager(client, address):
 	client.send(text.encode("utf-8"))
 	data = client.recv(size).decode("utf-8")
 	print("Recebido:", data, "\ndo", address)
+	accepted = "Recebido!"
+	client.send(accepted.encode("utf-8"))
 	usernames.append((data,-1,address)) # (username, valorDigitado)
 
 	print("Usuário adicionado! \nNova lista de usuários:", [item[0] for item in usernames])
